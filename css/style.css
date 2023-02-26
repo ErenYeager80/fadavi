@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body,
+main {
+  background-color: #e2e2e2;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a:hover {
+  color: #f1276a;
+}
+
+input,
+textarea {
+  border: none !important;
+}
+
+.btn-primary {
+  background-color: #524cad;
+  border-color: #524cad;
+}
+
+.btn-primary:hover {
+  background-color: #524cad;
+  border-color: #524cad;
+  color: ;
+}
+
+.navbar {
+  box-shadow: (0, 0, 0, 0.7) 0px -12px 5px 18px !important
+}
+
+main {
+  margin-top: 10px;
+}
+
+.btn-secondary {
+  background-color: #f8f8f8;
+  border-color: #f8f8f8;
+  color: #4d4b4b;
+}
+
+.list-group-item {
+  margin: 8px 4px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.list-group-item {
+  background-color: #f8f8f8 !important;
+}
+
+.list-group-item a,
+.btn-secondary a {
+  color: #4d4b4b;
+}
+
+.home-page {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.new-order {
+    height: 70vh;
+    overflow: hidden;
+}
+
+.container2 {
+    width: auto;
+    padding: 0 15px;
+}
+
+.order {
+    position: absolute;
+    top: 91vh;
+    width: 100%;
+}
+
+.modal-header .btn-close {
+    margin: 0;
+}
+
+.form-floating {
+    padding: 8px;
+}
+
+.w100 {
+    width: 100% !important;
+}
+
+.change-order {
+  height: 100%;
+  margin: 0 5px;
+}
+
+.discounting {
+  /* display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px; */
+  position: relative;
+}
+
+.discounting .discouninput {
+  height: 50px;
+}
+
+.radios {
+  position: absolute;
+  right: 10px;
+  top: 46%;
+}
+
+.textarea {
+  height: 100px !important;
+  padding: 5px;
+}
+
+.plus-input {
+  position: absolute;
+  top: 20%;
+}
+
+.minus-input {
+  position: absolute;
+  right: 10px;
+  top: 20%;
+}
+
+.card {
+  background-color: transparent;
+}
+
+.main-card {
+  margin: 20px 40px;
+  background-color: #d0d8db;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.btn {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+/* radio button */
+.button {
+  float: left;
+  margin: 0 5px 0 0;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  background: #cfd7da;
+  border-radius: 4px;
+}
+
+.button label,
+.button input {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.button input[type="radio"] {
+  opacity: 0.011;
+  z-index: 100;
+}
+
+.button input[type="radio"]:checked + label {
+  background: #524cad;
+  border-radius: 4px;
+}
+
+.button label {
+  cursor: pointer;
+  z-index: 90;
+  line-height: 1.3em;
+}
