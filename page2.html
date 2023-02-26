@@ -66,7 +66,7 @@
     }
     $(document).ready(() => {
         if (Cookies.get('token') === undefined)
-            window.location.href = 'http://localhost:63342/fadavi/index.html?'
+            window.location.href = '/fadavi/index.html?'
         else {
             $.ajax({
                 url: "https://kileh.intsalesbaron.com/api/getDesks",

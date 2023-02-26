@@ -54,7 +54,7 @@
 <script>
     $(document).ready(()=>{
         if(Cookies.get('token')!==undefined)
-            window.location.href='http://localhost:63342/fadavi/page2.html?'
+            window.location.href='/fadavi/page2.html?'
     })
     $('#login').click(() => {
         $.post('https://kileh.intsalesbaron.com/api/auth/login',
@@ -68,7 +68,7 @@
                 console.log(res)
                 if(res.isSuccess){
                     Cookies.set('token', res.data.token, { expires: 1 });
-                    window.location.href='http://localhost:63342/fadavi/page2.html?'
+                    window.location.href='/fadavi/page2.html?'
                 }
                 else{
                     console.log("error")
