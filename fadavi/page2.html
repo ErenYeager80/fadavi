@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-utilities.rtl.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.bundle.min.js"></script>
+
+    <title>page 1</title>
+</head>
+<body class="text-center">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" id="btnNavbar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+        </a>
+        <a class="navbar-brand page-title" href="#">Zaferuw</a>
+    </div>
+</nav>
+
+<main>
+    <div class="sidebar sidebar-hide" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-header-img">
+                <img src="./img/brand.png" alt="brand">
+            </div>
+            <div class="sidebar-header-user">
+                <p class="user">Waiter No.01</p>
+                <p class="rank">Waiters</p>
+            </div>
+        </div>
+        <div class="sidebar-main">
+            <ul>
+                <li>Receips</li>
+                <li>Logout</li>
+            </ul>
+        </div>
+        <div class="sidebar-footer">
+            <p>version 3.4.0</p>
+        </div>
+    </div>
+
+    <div class="d-flex flex-column align-items-stretch flex-shrink-0 ">
+        <div class="list-group list-group-flush border-bottom scrollarea">
+
+        </div>
+    </div>
+</main>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Table 1</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex flex-column align-items-start flex-shrink-0 bg-white">
+                    <a class="nav-link active" id="link1" href="./page3.html">Open new Order</a>
+                    <a class="nav-link active" id="link2" href="./page4.html">Edit Last Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+<script src="./js/main.js"></script>
+<script>
+    function setModalId(id){
+        const link1=$('#link1')
+        const link2=$('#link2')
+        link1.attr('href','./page3.html?id='+id)
+        link2.attr('href','./page4.html?id='+id)
+    }
+    $(document).ready(() => {
+        if (Cookies.get('token') === undefined)
+            window.location.href = '/fadavi/index.html?'
+        else {
+            $.ajax({
+                url: "https://kileh.intsalesbaron.com/api/getDesks",
+                type: "GET",
+                beforeSend: (xhr) => {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + Cookies.get('token'));
+                },
+                success: (res) => {
+                    console.log(res)
+                    res.data.forEach(desk => {
+                        $('.scrollarea').append(`
+ <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setModalId(${desk.id})">
+                <a class="list-group-item lh-tight" aria-current="true">
+                    <div class="d-flex w-100 align-items-center">
+                        <div>
+                            <img style="max-width:45px" src="./img/table.png" alt="table" >
+                        </div>
+                        <div class="table-title">
+                            <strong class="mb-1">${desk.name}</strong>
+                            <small class="text-muted"></small>
+                        </div>
+                    </div>
+                </a>
+            </button>
+`)
+                    })
+                }
+            });
+        }
+
+    })
+</script>
+</body>
+</html>
