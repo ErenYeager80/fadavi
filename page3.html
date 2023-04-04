@@ -56,9 +56,10 @@
         <script src="./js/bootstrap.bundle.min.js"></script>
         <script src="./js/main.js"></script>
     <script>
+        const address = '/fadavi';
         $(document).ready(() => {
             if (Cookies.get('token') === undefined)
-                window.location.href = '/fadavi/index.html?'
+                window.location.href = `${address}/index.html?`
             else {
                 $.ajax({
                     url: "https://kileh.intsalesbaron.com/api/getFoods",

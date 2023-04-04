@@ -78,6 +78,7 @@
 
 <script src="./js/main.js"></script>
 <script>
+    const address = '/fadavi';
     function setModalId(id){
         const link1=$('#link1')
         const link2=$('#link2')
@@ -86,7 +87,7 @@
     }
     $(document).ready(() => {
         if (Cookies.get('token') === undefined)
-            window.location.href = '/fadavi/index.html?'
+            window.location.href = `${address}/index.html?`
         else {
             $.ajax({
                 url: "https://kileh.intsalesbaron.com/api/getDesks",
