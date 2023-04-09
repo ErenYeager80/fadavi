@@ -22,21 +22,20 @@
             </div>
         </nav>
         
-        <form>
+
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="floatingInput" placeholder="Search">
+              <input onkeyup="filter(this)" type="text" class="form-control" id="floatingInput" placeholder="Search">
               <label for="floatingInput">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                   </svg>
               </label>
             </div>
-        </form>
+
 
         <main class="new-order">
             <div class="d-flex flex-column align-items-stretch flex-shrink-0" >
                 <div class="list-group list-group-flush border-bottom scrollarea overflow-scroll" style="max-height: 80vh">
-
                   
                 </div>
               </div>
@@ -45,7 +44,7 @@
         <footer class="footer mt-auto py-3 order">
             <div class="container2">
                 <div class="d-grid gap-2 col-12 mx-auto">
-                    <button type="button" class="btn btn-primary p-2 " ><a style="color: #fff;" href="page7.html">Charge 12.75$</a></button>
+                    <button type="button" class="btn btn-primary p-2" id="charge_button" ><a style="color: #fff;" href="page7.html">Charge 12.75$</a></button>
                 </div>
             </div>
         </footer>
@@ -57,6 +56,7 @@
         <script src="./js/main.js"></script>
     <script>
         const address = '/fadavi';
+        let foods=[],selectedFood=[]
         $(document).ready(() => {
             if (Cookies.get('token') === undefined)
                 window.location.href = `${address}/index.html?`
@@ -68,27 +68,76 @@
                         xhr.setRequestHeader('Authorization', 'Bearer ' + Cookies.get('token'));
                     },
                     success: (res) => {
-                        console.log(res)
-                        res.data.forEach(food => {
-                            $('.scrollarea').append(`
-                <a class="list-group-item py-3 lh-tight" aria-current="true">
+                        foods=res.data;
+                        renderFoods(foods);
+                    }
+                });
+
+            }
+            updatePrice()
+            $('#charge_button').click(()=>{
+                let cart=localStorage.getItem('cart')
+                let desk_id = new URLSearchParams(window.location.search).get('id')
+
+                let total=0
+                for(const food of selectedFood){
+                    total +=food.price;
+                }
+
+                const receipt={desk_id,receipt_items:selectedFood,tip:0,vat:0,total}
+                if(cart!=null){
+                    cart=JSON.parse(cart)
+                    cart.push(receipt)
+                }else{
+                    cart=[receipt]
+                }
+                localStorage.setItem('cart',JSON.stringify(cart))
+                location.href=`${address}/page4.html?id=`+desk_id
+            })
+        })
+        const renderFoods=(foods)=>{
+            $('.scrollarea').empty();
+            foods.forEach(food => {
+                $('.scrollarea').append(`
+                <a class="list-group-item py-3 lh-tight" aria-current="true" onclick="toggleFoodSelect(this,${food.id})">
                     <div class="d-flex w-100 align-items-center justify-content-between">
                         <div style="margin-right: 10px">
                             <img style="max-width:45px" src="./img/brand.png" alt="table" >
                         </div>
                         <div class="d-flex w-100 align-items-center justify-content-between">
                             <strong class="mb-1">${food.name}</strong>
-                            <small class="text-muted">${food.price} $</small>
+                            <small >${food.price} $</small>
                         </div>
                     </div>
                 </a>
 `)
-                        })
-                    }
-                });
+            })
+        }
+        const filter=(data)=>{
+            renderFoods(foods.filter((food)=>food.name.toLowerCase().includes(data.value.toLowerCase())))
+        }
+        const toggleFoodSelect=(element,foodId)=>{
+
+            $(element).toggleClass('list-group-item-active')
+            const food = selectedFood.filter((food)=>food.id===foodId)[0]
+            if(food!=null){
+                selectedFood=selectedFood.filter((food)=>food.id!==foodId)
+            }
+            else{
+                selectedFood.push(foods.filter((food)=>food.id===foodId)[0])
+            }
+            updatePrice()
+        }
+        const updatePrice=()=>{
+            let sum=0;
+            const button=$('#charge_button')
+            for(const food of selectedFood){
+                sum +=food.price;
             }
 
-        })
+            button.prop('disabled', sum===0)
+            button.text('Charge '+sum+' $')
+        }
     </script>
     </body>
 </html>

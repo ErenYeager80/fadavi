@@ -9,53 +9,63 @@
     <link rel="stylesheet" href="./css/style.css">
     <title>page 1</title>
 </head>
-    <body class="text-center" >
-    
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
-                        <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146ZM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5Z"/>
-                      </svg>
-                </a>
-                <a class="navbar-brand" href="#">Table 1</a>
+<body class="text-center">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door"
+                 viewBox="0 0 16 16">
+                <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146ZM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5Z"/>
+            </svg>
+        </a>
+        <a class="navbar-brand" href="#">Table 1</a>
+    </div>
+</nav>
+
+<main class="new-order">
+
+    <form>
+        <div class="card" style="border: none;">
+            <div class="card-body main-card">
+                <h5 class="card-title" style="padding-top: 10px;">Total</h5>
+                <h2 class="card-text" style="padding: 10px; font-weight: bold;" id="total">12.75$</h2>
             </div>
-        </nav>
+        </div>
 
-        <main class="new-order">
+        <div class="form-floating mt-3 mb-3">
+            <input type="number" class="form-control" id="floatingInput" placeholder="Tip" style="height: 50px;">
+            <label for="floatingInput">
+                Tip
+            </label>
+        </div>
 
-            <form>
-                <div class="card" style="border: none;">
-                    <div class="card-body main-card" >
-                        <h5 class="card-title" style="padding-top: 10px;">Total</h5>
-                        <h2 class="card-text" style="padding: 10px; font-weight: bold;">12.75$</h2>
-                      </div>
-                </div>
+        <div class="d-grid gap-2 col-10 mx-auto">
+            <button class="btn btn-secondary p-2" type="button">SAVE</button>
+            <button class="btn btn-secondary p-2" type="button">
+                <a href="page4.html">Edit Order</a>
+            </button>
+            <button class="btn btn-secondary p-2" type="button">Kitchen Print</button>
+            <button class="btn btn-primary  p-2" type="button">Custom Print</button>
+            <button class="btn btn-secondary p-2" type="button">Order Completed</button>
+        </div>
 
-                <div class="form-floating mt-3 mb-3">
-                  <input type="number" class="form-control" id="floatingInput" placeholder="Tip" style="height: 50px;">
-                  <label for="floatingInput">
-                    Tip
-                  </label>
-                </div>
+    </form>
 
-                <div class="d-grid gap-2 col-10 mx-auto">
-                    <button class="btn btn-secondary p-2" type="button">SAVE</button>
-                    <button class="btn btn-secondary p-2" type="button">
-                        <a href="page4.html">Edit Order</a>
-                    </button>
-                    <button class="btn btn-secondary p-2" type="button">Kitchen Print</button>
-                    <button class="btn btn-primary  p-2" type="button">Custom Print</button>
-                    <button class="btn btn-secondary p-2" type="button">Order Completed</button>
-                </div>
+</main>
 
-            </form>
-
-        </main>
-        
-
-        <script src="./js/bootstrap.min.js"></script>
-        <script src="./js/bootstrap.bundle.min.js"></script>
-        <script src="./js/main.js"></script>
-    </body>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"
+        integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/bootstrap.bundle.min.js"></script>
+<script src="./js/main.js"></script>
+<script>
+    let desk_id = new URLSearchParams(window.location.search).get('id')
+    let cart = JSON.parse(localStorage.getItem('cart'))
+    let deskCart = cart.filter((x)=>x.desk_id===desk_id)[0]
+    $(document).ready(() => {
+        $('#total').text('Charge '+deskCart.total + ' $')
+    })
+</script>
+</body>
 </html>

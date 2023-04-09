@@ -87,7 +87,11 @@ main {
 }
 
 .list-group-item {
-  background-color: #f8f8f8 !important;
+  background-color: #f8f8f8;
+}
+
+.list-group-item-active {
+  background-color: #524cade0;
 }
 
 .list-group-item a,
