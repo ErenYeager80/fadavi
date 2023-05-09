@@ -55,7 +55,7 @@
         <script src="./js/bootstrap.bundle.min.js"></script>
         <script src="./js/main.js"></script>
     <script>
-        const address = '/fadavi';
+        const address = '';
         let foods=[],selectedFood=[]
         $(document).ready(() => {
             if (Cookies.get('token') === undefined)
@@ -84,7 +84,19 @@
                     total +=food.price;
                 }
 
-                const receipt={desk_id,receipt_items:selectedFood,tip:0,vat:0,total}
+                const receipt={desk_id,receipt_items:selectedFood.map(x=>{
+                    return {
+                        "food_id": x.id,
+                        "category_id": x.category_id,
+                        "food_name": x.name,
+                        "food_price": x.price,
+                        "food_image": x.image,
+                        "ordered_count": 1,
+                        "comment": "بدون پیاز",
+                        "discount": 0,
+                        "discount_type": 1
+                    }
+                    }),tip:0,vat:0,total}
                 if(cart!=null){
                     cart=JSON.parse(cart)
                     cart.push(receipt)

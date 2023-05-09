@@ -19,3 +19,5 @@ btnNavbar.addEventListener('click', () => {
     sidebar.classList.toggle('sidebar-show');
     sidebar.classList.toggle('sidebar-hide');
 })
+
+// const address = '/fadavi';

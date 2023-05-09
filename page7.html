@@ -46,7 +46,7 @@
                 <a href="page4.html">Edit Order</a>
             </button>
             <button class="btn btn-secondary p-2" type="button">Kitchen Print</button>
-            <button class="btn btn-primary  p-2" type="button">Custom Print</button>
+            <button class="btn btn-primary  p-2" type="button" id="print_btn">Custom Print</button>
             <button class="btn btn-secondary p-2" type="button">Order Completed</button>
         </div>
 
@@ -60,11 +60,20 @@
 <script src="./js/bootstrap.bundle.min.js"></script>
 <script src="./js/main.js"></script>
 <script>
-    let desk_id = new URLSearchParams(window.location.search).get('id')
-    let cart = JSON.parse(localStorage.getItem('cart'))
-    let deskCart = cart.filter((x)=>x.desk_id===desk_id)[0]
+
+
+
     $(document).ready(() => {
+        let desk_id = localStorage.getItem('desk_id')
+        let cart = JSON.parse(localStorage.getItem('cart'))
+        let deskCart = cart.filter((x)=>x.desk_id===desk_id)[0]
         $('#total').text('Charge '+deskCart.total + ' $')
+    })
+    $('#print_btn').click(()=>{
+        let desk_id = localStorage.getItem('desk_id')
+        let cart = JSON.parse(localStorage.getItem('cart'))
+        let deskCart = cart.filter((x)=>x.desk_id===desk_id)[0]
+        Android.print(JSON.stringify(deskCart))
     })
 </script>
 </body>
